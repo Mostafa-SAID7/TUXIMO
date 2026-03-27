@@ -44,14 +44,16 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           className="max-w-xs mx-auto mb-12"
         >
-          <div className="bg-card rounded-2xl p-6 shadow-lg border border-border relative overflow-hidden">
+          <div className="bg-card rounded-2xl shadow-lg border border-border relative overflow-hidden">
             <div className="absolute top-4 right-4 bg-foreground text-background text-xs font-bold px-3 py-1 rounded-full z-10">
               -20%
             </div>
-            <p className="text-sm font-medium text-foreground mb-4">
-              Elevate Your Journey With Us
-            </p>
-            <div className="relative w-full h-32 rounded-lg overflow-hidden">
+            <div className="absolute top-4 left-4 z-10">
+              <p className="text-sm font-medium text-foreground bg-background/80 backdrop-blur-sm px-3 py-2 rounded-lg">
+                Elevate Your Journey With Us
+              </p>
+            </div>
+            <div className="relative w-full h-48">
               <img
                 src="/airplane-hero.jpg"
                 alt="Airplane Front View"
