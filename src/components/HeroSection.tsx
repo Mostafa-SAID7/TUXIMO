@@ -14,7 +14,8 @@ const HeroSection = () => {
             alt="Airplane"
             className="w-full h-full object-contain"
             style={{
-              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
+              transform: 'scaleX(-1)'
             }}
           />
         </div>
