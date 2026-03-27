@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
+import { HomePageSkeleton, PageSkeleton, FormPageSkeleton } from "@/components/SkeletonLoader";
 
 // Lazy load pages for better performance
 const Index = lazy(() => import("./pages/Index"));
@@ -17,13 +18,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
-// Loading component
-const PageLoader = () => (
-  <div className="min-h-screen bg-background flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-neon"></div>
-  </div>
-);
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
@@ -31,18 +25,65 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="/hotels" element={<Hotels />} />
-              <Route path="/cars" element={<Cars />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/login" element={<Login />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <Routes>
+            <Route 
+              path="/" 
+              element={
+                <Suspense fallback={<HomePageSkeleton />}>
+                  <Index />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/about" 
+              element={
+                <Suspense fallback={<PageSkeleton />}>
+                  <AboutUs />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/hotels" 
+              element={
+                <Suspense fallback={<PageSkeleton />}>
+                  <Hotels />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/cars" 
+              element={
+                <Suspense fallback={<PageSkeleton />}>
+                  <Cars />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/support" 
+              element={
+                <Suspense fallback={<PageSkeleton />}>
+                  <Support />
+                </Suspense>
+              } 
+            />
+            <Route 
+              path="/login" 
+              element={
+                <Suspense fallback={<FormPageSkeleton />}>
+                  <Login />
+                </Suspense>
+              } 
+            />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route 
+              path="*" 
+              element={
+                <Suspense fallback={<PageSkeleton />}>
+                  <NotFound />
+                </Suspense>
+              } 
+            />
+          </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </HelmetProvider>
