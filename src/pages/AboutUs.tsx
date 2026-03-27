@@ -1,38 +1,10 @@
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Users, Target, Rocket, Award } from "lucide-react";
 import { useEffect, useRef } from "react";
-
-const stats = [
-  { value: "10K+", label: "Active Users" },
-  { value: "50M+", label: "Workflows Automated" },
-  { value: "99.9%", label: "Uptime SLA" },
-  { value: "150+", label: "Countries Worldwide" }
-];
-
-const values = [
-  {
-    icon: Users,
-    title: "Customer First",
-    description: "We build solutions that solve real problems for real people. Your success is our mission."
-  },
-  {
-    icon: Target,
-    title: "Innovation Driven",
-    description: "Pushing boundaries with cutting-edge AI and automation technology that stays ahead of the curve."
-  },
-  {
-    icon: Rocket,
-    title: "Speed & Quality",
-    description: "Fast deployment without compromising on security, reliability, or user experience."
-  },
-  {
-    icon: Award,
-    title: "Excellence Always",
-    description: "We hold ourselves to the highest standards in everything we do, from code to customer support."
-  }
-];
+import { stats, values } from "@/data/aboutStats";
 
 const AboutUs = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -165,22 +137,28 @@ const AboutUs = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {values.map((value, index) => (
-                <Card
-                  key={index}
-                  className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-neon/50 transition-all duration-300"
-                >
-                  <div className="mb-4 w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center">
-                    <value.icon className="w-6 h-6 text-neon" />
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {value.description}
-                  </p>
-                </Card>
-              ))}
+              {values.map((value, index) => {
+                const IconComponent = value.icon === "Users" ? Users : 
+                                     value.icon === "Target" ? Target :
+                                     value.icon === "Rocket" ? Rocket : Award;
+                
+                return (
+                  <Card
+                    key={index}
+                    className="p-8 bg-card/50 backdrop-blur-sm border-border/50 hover:border-neon/50 transition-all duration-300"
+                  >
+                    <div className="mb-4 w-12 h-12 rounded-xl bg-neon/10 flex items-center justify-center">
+                      <IconComponent className="w-6 h-6 text-neon" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-3">
+                      {value.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </Card>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -212,6 +190,8 @@ const AboutUs = () => {
           </div>
         </section>
       </div>
+
+      <Footer />
     </div>
   );
 };

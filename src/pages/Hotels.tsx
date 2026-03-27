@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { Hotel, MapPin, Star, Wifi, Coffee, Dumbbell } from "lucide-react";
+import { Hotel, MapPin, Star, Wifi } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -97,6 +98,8 @@ const Hotels = () => {
           </motion.div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };

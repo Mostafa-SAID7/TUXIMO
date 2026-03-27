@@ -11,7 +11,8 @@ const HeroSection = () => {
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%] group cursor-pointer">
           <img
             src="/airplane-promo.png"
-            alt="Airplane"
+            alt="TUXIMO Premium Flight Service - Luxury Airplane"
+            loading="eager"
             className="w-full h-full object-contain transition-all duration-700 ease-in-out"
             style={{
               filter: 'grayscale(100%) drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
@@ -62,7 +63,8 @@ const HeroSection = () => {
             <div className="relative w-full h-48">
               <img
                 src="/airplane-hero.jpg"
-                alt="Airplane Front View"
+                alt="TUXIMO Flight Experience - Airplane Front View"
+                loading="eager"
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out group-hover:scale-105"
               />
             </div>

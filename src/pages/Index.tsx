@@ -5,6 +5,7 @@ import VideoCardsSection from "@/components/VideoCardsSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { useEffect, useRef } from "react";
 
 const Index = () => {
@@ -25,7 +26,13 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-background">
+    <>
+      <SEO 
+        title="TUXIMO - Book Flights, Hotels & Cars | Best Travel Deals"
+        description="Find countless flight options and deals to various destinations around the world. Book flights to Tokyo, Paris, Dubai, London, New York, Singapore and more."
+        keywords="flight booking, cheap flights, hotel booking, car rental, travel deals, airline tickets, Tokyo flights, Paris flights, Dubai flights"
+      />
+      <div className="relative min-h-screen bg-background">
       {/* Full-screen video background */}
       <div 
         className="fixed inset-0 w-screen h-screen overflow-hidden" 
@@ -70,6 +77,7 @@ const Index = () => {
         <Footer />
       </div>
     </div>
+    </>
   );
 };
 

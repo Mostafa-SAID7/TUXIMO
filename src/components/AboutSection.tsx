@@ -23,7 +23,8 @@ const AboutSection = () => {
           <span className="inline-flex items-center align-middle">
             <img 
               src="/1.jpg" 
-              alt="Travel" 
+              alt="Travel destination experience" 
+              loading="lazy"
               className="inline-block w-16 h-10 md:w-24 md:h-14 object-cover rounded-full align-middle"
               style={{ verticalAlign: 'middle' }}
             />

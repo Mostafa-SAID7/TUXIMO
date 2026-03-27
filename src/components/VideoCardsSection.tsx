@@ -1,13 +1,5 @@
 import { useState, useEffect } from "react";
-
-const flightDestinations = [
-  { src: "/Tokyo.jpg", city: "Tokyo, Japan", price: "$308", route: "Surakarta City (SOC) - Singapore (SIN)" },
-  { src: "/Paris.jpg", city: "Paris, France", price: "$425", route: "Surakarta City (SOC) - Singapore (SIN)" },
-  { src: "/Dubai.jpg", city: "Dubai, UAE", price: "$520", route: "Surakarta City (SOC) - Singapore (SIN)" },
-  { src: "/London.jpg", city: "London, UK", price: "$380", route: "Surakarta City (SOC) - Singapore (SIN)" },
-  { src: "/New York.jpg", city: "New York, USA", price: "$650", route: "Surakarta City (SOC) - Singapore (SIN)" },
-  { src: "/Singapore.jpg", city: "Singapore", price: "$290", route: "Surakarta City (SOC) - Singapore (SIN)" },
-];
+import { flightDestinations } from "@/data/destinations";
 
 interface FlightCardProps {
   destination: typeof flightDestinations[0];
@@ -29,7 +21,8 @@ const FlightCard = ({ destination, isExpanded, onHover, index }: FlightCardProps
     >
       <img
         src={destination.src}
-        alt={destination.city}
+        alt={`${destination.city} - Flight destination from ${destination.route}`}
+        loading="lazy"
         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
@@ -168,7 +161,8 @@ const MobileFlightCard = ({ destination, index }: { destination: typeof flightDe
     <div className="relative overflow-hidden rounded-xl border border-border/30 h-[200px] group cursor-pointer">
       <img
         src={destination.src}
-        alt={destination.city}
+        alt={`${destination.city} - Flight destination from ${destination.route}`}
+        loading="lazy"
         className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />

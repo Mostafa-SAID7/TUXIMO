@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
 import { LogIn, Mail, Lock } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link } from "react-router-dom";
 
 const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
@@ -131,6 +131,8 @@ const Login = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
