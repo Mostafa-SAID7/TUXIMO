@@ -44,12 +44,12 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
           className="max-w-xs mx-auto mb-12"
         >
-          <div className="bg-card rounded-2xl shadow-lg border border-border relative overflow-hidden">
+          <div className="bg-card rounded-2xl shadow-lg border border-border relative overflow-hidden group cursor-pointer">
             <div className="absolute top-4 right-4 bg-foreground text-background text-xs font-bold px-3 py-1 rounded-full z-10">
               -20%
             </div>
             <div className="absolute top-4 left-4 z-10">
-              <p className="text-sm font-medium text-foreground bg-background/80 backdrop-blur-sm px-3 py-2 rounded-lg">
+              <p className="text-sm font-medium text-foreground bg-background/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-md">
                 Elevate Your Journey With Us
               </p>
             </div>
@@ -57,7 +57,7 @@ const HeroSection = () => {
               <img
                 src="/airplane-hero.jpg"
                 alt="Airplane Front View"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out group-hover:scale-105"
               />
             </div>
           </div>
