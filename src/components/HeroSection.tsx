@@ -10,7 +10,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%] opacity-80">
           <img
-            src="/airplane-hero.jpg"
+            src="/airplane-promo.png"
             alt="Airplane"
             className="w-full h-full object-contain"
             style={{
@@ -53,7 +53,7 @@ const HeroSection = () => {
             </p>
             <div className="relative w-full h-32 rounded-lg overflow-hidden">
               <img
-                src="/airplane-promo.png"
+                src="/airplane-hero.jpg"
                 alt="Airplane Front View"
                 className="w-full h-full object-cover"
               />
