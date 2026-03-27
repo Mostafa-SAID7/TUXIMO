@@ -2,11 +2,28 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import VideoCardsSection from "@/components/VideoCardsSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import { useEffect, useRef } from "react";
 
 const Index = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (videoRef.current) {
+        const scrollPosition = window.scrollY;
+        const maxScroll = 300;
+        const opacity = Math.max(0.3, 1 - (scrollPosition / maxScroll) * 0.7);
+        videoRef.current.style.opacity = opacity.toString();
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-background">
-      {/* Full-screen image background */}
+      {/* Full-screen video background */}
       <div 
         className="fixed inset-0 w-screen h-screen overflow-hidden" 
         style={{ 
@@ -14,19 +31,28 @@ const Index = () => {
           zIndex: 0 
         }}
       >
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover transition-opacity duration-300"
           style={{ 
-            backgroundImage: 'url(/airplane-hero.jpg)',
-            filter: 'brightness(0.95) contrast(1.1)',
-            opacity: 0.4
+            mixBlendMode: 'hard-light',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            filter: 'brightness(0.7) contrast(2)'
           }}
-        />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background/95" />
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
       </div>
 
-      {/* Navbar overlays background */}
+      {/* Navbar overlays video */}
       <div style={{ position: 'relative', zIndex: 50 }}>
         <Navigation />
       </div>
