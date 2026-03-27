@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section className="min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 relative">
       {/* Large Airplane Image Overlay */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%] opacity-80">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%]">
           <img
             src="/airplane-promo.png"
             alt="Airplane"
