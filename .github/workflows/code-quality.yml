@@ -30,7 +30,7 @@ jobs:
         run: npm ci
       
       - name: Run Prettier
-        run: npx prettier --check "src/**/*.{ts,html,css,json}"
+        run: npx prettier --check "src/**/*.{ts,tsx,css,json}"
         continue-on-error: true
 
   eslint:
@@ -92,7 +92,7 @@ jobs:
         run: npm ci
       
       - name: Build
-        run: npm run build:prod
+        run: npm run build
       
       - name: Check bundle size
         run: |
@@ -101,8 +101,8 @@ jobs:
           echo "| File | Size |" >> $GITHUB_STEP_SUMMARY
           echo "|------|------|" >> $GITHUB_STEP_SUMMARY
           
-          cd dist/lost-yeti
-          for file in *.js; do
+          cd dist
+          for file in assets/*.js; do
             if [ -f "$file" ]; then
               size=$(du -h "$file" | cut -f1)
               echo "| $file | $size |" >> $GITHUB_STEP_SUMMARY
@@ -110,10 +110,10 @@ jobs:
           done
       
       - name: Upload bundle analysis
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bundle-analysis
-          path: dist/lost-yeti/*.js
+          path: dist/assets/*.js
 
   accessibility:
     name: Accessibility Check
@@ -133,11 +133,11 @@ jobs:
         run: npm ci
       
       - name: Build
-        run: npm run build:prod
+        run: npm run build
       
       - name: Run accessibility tests
         run: |
-          npx @axe-core/cli dist/lost-yeti/index.html --exit
+          npx @axe-core/cli dist/index.html --exit
         continue-on-error: true
 
   html-validate:
@@ -148,9 +148,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Validate HTML templates
+      - name: Validate HTML
         run: |
-          npx html-validate "src/**/*.html"
+          echo "HTML validation skipped for React/JSX project"
         continue-on-error: true
 
   css-lint:
@@ -181,15 +181,8 @@ jobs:
       
       - name: Analyze complexity
         run: |
-          npx complexity-report src/app --format json > complexity-report.json
+          echo "Code complexity analysis skipped"
         continue-on-error: true
-      
-      - name: Upload complexity report
-        uses: actions/upload-artifact@v3
-        with:
-          name: complexity-report
-          path: complexity-report.json
-        if: always()
 
   comment-pr:
     name: Comment on PR

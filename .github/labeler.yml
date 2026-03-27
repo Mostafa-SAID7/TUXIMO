@@ -17,35 +17,35 @@ source:
 components:
   - changed-files:
     - any-glob-to-any-file: 
-      - 'src/app/components/**/*'
-      - 'src/app/sections/**/*'
+      - 'src/components/**/*'
+      - 'src/pages/**/*'
 
 # Styles
 styles:
   - changed-files:
     - any-glob-to-any-file:
       - '**/*.css'
-      - '**/*.scss'
-      - 'src/styles.css'
+      - 'src/index.css'
+      - 'src/App.css'
 
-# TypeScript
+# TypeScript/React
 typescript:
   - changed-files:
-    - any-glob-to-any-file: '**/*.ts'
-
-# HTML Templates
-templates:
-  - changed-files:
-    - any-glob-to-any-file: '**/*.html'
+    - any-glob-to-any-file: 
+      - '**/*.ts'
+      - '**/*.tsx'
 
 # Configuration
 configuration:
   - changed-files:
     - any-glob-to-any-file:
-      - 'angular.json'
+      - 'vite.config.ts'
       - 'tsconfig*.json'
       - 'package.json'
       - 'package-lock.json'
+      - 'tailwind.config.ts'
+      - 'postcss.config.js'
+      - 'components.json'
 
 # GitHub Actions
 github-actions:
@@ -57,40 +57,29 @@ scripts:
   - changed-files:
     - any-glob-to-any-file: '.github/scripts/**/*'
 
-# Docker
-docker:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'Dockerfile'
-      - '.dockerignore'
-      - 'nginx.conf'
-
-# Dependencies
-dependencies:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'package.json'
-      - 'package-lock.json'
-
 # Assets
 assets:
   - changed-files:
-    - any-glob-to-any-file: 'src/assets/**/*'
+    - any-glob-to-any-file: 
+      - 'src/assets/**/*'
+      - 'public/**/*'
 
 # Tests
 tests:
   - changed-files:
     - any-glob-to-any-file:
       - '**/*.spec.ts'
+      - '**/*.spec.tsx'
       - '**/*.test.ts'
+      - '**/*.test.tsx'
 
 # SEO
 seo:
   - changed-files:
     - any-glob-to-any-file:
-      - 'src/sitemap.xml'
-      - 'src/robots.txt'
-      - 'src/index.html'
+      - 'public/sitemap.xml'
+      - 'public/robots.txt'
+      - 'index.html'
 
 # Security
 security:
@@ -98,3 +87,18 @@ security:
     - any-glob-to-any-file:
       - 'docs/SECURITY.md'
       - '.github/workflows/security.yml'
+
+# Data
+data:
+  - changed-files:
+    - any-glob-to-any-file: 'src/data/**/*'
+
+# Hooks
+hooks:
+  - changed-files:
+    - any-glob-to-any-file: 'src/hooks/**/*'
+
+# UI Components
+ui:
+  - changed-files:
+    - any-glob-to-any-file: 'src/components/ui/**/*'

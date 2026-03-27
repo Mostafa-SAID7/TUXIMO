@@ -21,7 +21,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
@@ -35,7 +36,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload audit report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: audit-report
           path: audit-report.json
@@ -57,7 +58,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload Snyk report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: snyk-report
           path: snyk-report.json
@@ -76,15 +77,15 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
-          languages: javascript, typescript
+          languages: javascript-typescript
       
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+        uses: github/codeql-action/autobuild@v3
       
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3
 
   trivy-scan:
     name: Trivy Container Scan
@@ -94,20 +95,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Build Docker image
-        run: docker build -t lost-yeti:${{ github.sha }} .
-      
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: 'lost-yeti:${{ github.sha }}'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-      
-      - name: Upload Trivy results to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: 'trivy-results.sarif'
+      - name: Skip Docker scan
+        run: |
+          echo "Docker scan skipped - no Dockerfile in project"
+          echo "Vercel handles deployment, no container needed"
 
   owasp-scan:
     name: OWASP Dependency Check
@@ -120,14 +111,14 @@ jobs:
       - name: Run OWASP Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
         with:
-          project: 'lost-yeti'
+          project: 'tuximo'
           path: '.'
           format: 'HTML'
           out: 'reports'
         continue-on-error: true
       
       - name: Upload OWASP report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: owasp-report
           path: reports
@@ -162,7 +153,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
@@ -176,7 +168,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload license report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: license-report
           path: license-report.json
@@ -189,7 +181,7 @@ jobs:
     
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
       
       - name: Generate summary report
         run: |
@@ -206,7 +198,7 @@ jobs:
           cat security-summary.md
       
       - name: Upload summary
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: security-summary
           path: security-summary.md
@@ -234,5 +226,5 @@ jobs:
     steps:
       - name: Send alert
         run: |
-          echo "Security scan failed! Notifying security team..."
-          # Add notification logic here (email, Slack, etc.)
+          echo "Security scan failed! Review the security report for details."
+          echo "No external notification configured."
