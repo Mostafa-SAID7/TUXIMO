@@ -36,7 +36,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload audit report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-report
           path: audit-report.json
@@ -58,7 +58,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload Snyk report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: snyk-report
           path: snyk-report.json
@@ -118,7 +118,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload OWASP report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: owasp-report
           path: reports
@@ -168,7 +168,7 @@ jobs:
         continue-on-error: true
       
       - name: Upload license report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: license-report
           path: license-report.json
@@ -198,7 +198,7 @@ jobs:
           cat security-summary.md
       
       - name: Upload summary
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: security-summary
           path: security-summary.md
