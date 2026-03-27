@@ -1,7 +1,10 @@
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
 import VideoCardsSection from "@/components/VideoCardsSection";
-import FeaturesSection from "@/components/FeaturesSection";
+import WhyChooseUsSection from "@/components/WhyChooseUsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import Footer from "@/components/Footer";
 import { useEffect, useRef } from "react";
 
 const Index = () => {
@@ -60,8 +63,11 @@ const Index = () => {
       {/* Hero content */}
       <div style={{ position: 'relative', zIndex: 10 }}>
         <HeroSection />
+        <AboutSection />
         <VideoCardsSection />
-        <FeaturesSection />
+        <WhyChooseUsSection />
+        <TestimonialsSection />
+        <Footer />
       </div>
     </div>
   );

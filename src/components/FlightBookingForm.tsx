@@ -17,7 +17,6 @@ import {
   Plane, 
   Hotel, 
   Car, 
-  Headphones, 
   Search,
   ArrowLeftRight,
   Calendar as CalendarIcon,
@@ -44,7 +43,7 @@ const FlightBookingForm = () => {
   return (
     <div className="bg-card rounded-3xl shadow-2xl border border-border overflow-hidden">
       {/* Tabs for Flights, Hotels, Cars */}
-      <div className="flex items-center justify-between p-6 border-b border-border">
+      <div className="p-6 border-b border-border">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full max-w-md grid-cols-3 bg-muted/50 p-1">
             <TabsTrigger 
@@ -92,39 +91,29 @@ const FlightBookingForm = () => {
             </TabsContent>
 
             <TabsContent value="hotels" className="mt-0">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="p-6 text-center"
-              >
-                <Hotel className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-xl font-semibold mb-2">Hotels Coming Soon</h3>
-                <p className="text-muted-foreground">Hotel booking feature will be available soon.</p>
-              </motion.div>
+              <HotelsContent
+                departDate={departDate}
+                setDepartDate={setDepartDate}
+                returnDate={returnDate}
+                setReturnDate={setReturnDate}
+                travelers={travelers}
+                incrementTravelers={incrementTravelers}
+                decrementTravelers={decrementTravelers}
+                showTravelerPopover={showTravelerPopover}
+                setShowTravelerPopover={setShowTravelerPopover}
+              />
             </TabsContent>
 
             <TabsContent value="cars" className="mt-0">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="p-6 text-center"
-              >
-                <Car className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                <h3 className="text-xl font-semibold mb-2">Car Rentals Coming Soon</h3>
-                <p className="text-muted-foreground">Car rental feature will be available soon.</p>
-              </motion.div>
+              <CarsContent
+                departDate={departDate}
+                setDepartDate={setDepartDate}
+                returnDate={returnDate}
+                setReturnDate={setReturnDate}
+              />
             </TabsContent>
           </AnimatePresence>
         </Tabs>
-
-        <Button variant="ghost" size="sm" className="flex items-center gap-2 ml-4">
-          <Headphones className="w-4 h-4" />
-          <span className="hidden md:inline">Customer Support</span>
-        </Button>
       </div>
     </div>
   );
@@ -394,3 +383,287 @@ const FlightsContent = ({
 };
 
 export default FlightBookingForm;
+
+
+interface HotelsContentProps {
+  departDate: Date | undefined;
+  setDepartDate: (date: Date | undefined) => void;
+  returnDate: Date | undefined;
+  setReturnDate: (date: Date | undefined) => void;
+  travelers: number;
+  incrementTravelers: () => void;
+  decrementTravelers: () => void;
+  showTravelerPopover: boolean;
+  setShowTravelerPopover: (show: boolean) => void;
+}
+
+const HotelsContent = ({
+  departDate,
+  setDepartDate,
+  returnDate,
+  setReturnDate,
+  travelers,
+  incrementTravelers,
+  decrementTravelers,
+  showTravelerPopover,
+  setShowTravelerPopover,
+}: HotelsContentProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="p-6"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+        {/* Destination */}
+        <div className="md:col-span-5">
+          <Label htmlFor="hotel-destination" className="text-sm font-medium mb-2 block text-muted-foreground">
+            Destination
+          </Label>
+          <Input
+            id="hotel-destination"
+            placeholder="City or Hotel Name"
+            className="h-12 bg-background border-border focus:border-foreground transition-colors"
+          />
+        </div>
+
+        {/* Check-in Date */}
+        <div className="md:col-span-2">
+          <Label className="text-sm font-medium mb-2 block text-muted-foreground">
+            Check-in
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full h-12 justify-start text-left font-normal bg-background border-border hover:border-foreground transition-colors"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {departDate ? format(departDate, "PPP") : <span className="text-muted-foreground">Date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={departDate}
+                onSelect={setDepartDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {/* Check-out Date */}
+        <div className="md:col-span-2">
+          <Label className="text-sm font-medium mb-2 block text-muted-foreground">
+            Check-out
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full h-12 justify-start text-left font-normal bg-background border-border hover:border-foreground transition-colors"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {returnDate ? format(returnDate, "PPP") : <span className="text-muted-foreground">Date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={returnDate}
+                onSelect={setReturnDate}
+                initialFocus
+                disabled={(date) => departDate ? date < departDate : false}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {/* Guests */}
+        <div className="md:col-span-2">
+          <Label className="text-sm font-medium mb-2 block text-muted-foreground">
+            Guests
+          </Label>
+          <Popover open={showTravelerPopover} onOpenChange={setShowTravelerPopover}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full h-12 justify-start text-left font-normal bg-background border-border hover:border-foreground transition-colors"
+              >
+                <Users className="mr-2 h-4 w-4" />
+                {travelers}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-48 p-4" align="end">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium">Guests</span>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full"
+                    onClick={decrementTravelers}
+                    disabled={travelers <= 1}
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="w-8 text-center font-semibold">{travelers}</span>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-8 w-8 rounded-full"
+                    onClick={incrementTravelers}
+                    disabled={travelers >= 9}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {/* Search Button */}
+        <div className="md:col-span-1">
+          <Button
+            size="lg"
+            className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 rounded-full transition-all hover:scale-105"
+          >
+            <Search className="w-5 h-5" />
+          </Button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+interface CarsContentProps {
+  departDate: Date | undefined;
+  setDepartDate: (date: Date | undefined) => void;
+  returnDate: Date | undefined;
+  setReturnDate: (date: Date | undefined) => void;
+}
+
+const CarsContent = ({
+  departDate,
+  setDepartDate,
+  returnDate,
+  setReturnDate,
+}: CarsContentProps) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="p-6"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+        {/* Pick-up Location */}
+        <div className="md:col-span-4">
+          <Label htmlFor="pickup-location" className="text-sm font-medium mb-2 block text-muted-foreground">
+            Pick-up Location
+          </Label>
+          <Input
+            id="pickup-location"
+            placeholder="City or Airport"
+            className="h-12 bg-background border-border focus:border-foreground transition-colors"
+          />
+        </div>
+
+        {/* Drop-off Location */}
+        <div className="md:col-span-4">
+          <Label htmlFor="dropoff-location" className="text-sm font-medium mb-2 block text-muted-foreground">
+            Drop-off Location
+          </Label>
+          <Input
+            id="dropoff-location"
+            placeholder="City or Airport"
+            className="h-12 bg-background border-border focus:border-foreground transition-colors"
+          />
+        </div>
+
+        {/* Pick-up Date */}
+        <div className="md:col-span-2">
+          <Label className="text-sm font-medium mb-2 block text-muted-foreground">
+            Pick-up
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full h-12 justify-start text-left font-normal bg-background border-border hover:border-foreground transition-colors"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {departDate ? format(departDate, "PPP") : <span className="text-muted-foreground">Date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={departDate}
+                onSelect={setDepartDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+
+        {/* Drop-off Date */}
+        <div className="md:col-span-2">
+          <Label className="text-sm font-medium mb-2 block text-muted-foreground">
+            Drop-off
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="outline"
+                className="w-full h-12 justify-start text-left font-normal bg-background border-border hover:border-foreground transition-colors"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {returnDate ? format(returnDate, "PPP") : <span className="text-muted-foreground">Date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={returnDate}
+                onSelect={setReturnDate}
+                initialFocus
+                disabled={(date) => departDate ? date < departDate : false}
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+      </div>
+
+      {/* Car Type and Search */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
+        <Select defaultValue="any">
+          <SelectTrigger className="w-[200px] h-10 bg-background border-border">
+            <SelectValue placeholder="Car Type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="any">Any Type</SelectItem>
+            <SelectItem value="economy">Economy</SelectItem>
+            <SelectItem value="compact">Compact</SelectItem>
+            <SelectItem value="midsize">Midsize</SelectItem>
+            <SelectItem value="suv">SUV</SelectItem>
+            <SelectItem value="luxury">Luxury</SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Button
+          size="lg"
+          className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-8 transition-all hover:scale-105"
+        >
+          <Search className="w-5 h-5 mr-2" />
+          Search Cars
+        </Button>
+      </div>
+    </motion.div>
+  );
+};

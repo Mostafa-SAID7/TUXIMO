@@ -5,17 +5,23 @@ const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 relative">
+    <section className="min-h-screen flex items-center justify-center overflow-hidden pt-24  relative">
       {/* Large Airplane Image Overlay */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%]">
+      <div className="absolute inset-0 pointer-events-auto z-0">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%] group cursor-pointer">
           <img
             src="/airplane-promo.png"
             alt="Airplane"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain transition-all duration-700 ease-in-out"
             style={{
-              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
+              filter: 'grayscale(100%) drop-shadow(0 20px 40px rgba(0,0,0,0.3))',
               transform: 'scaleX(-1)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.filter = 'grayscale(0%) drop-shadow(0 20px 40px rgba(0,0,0,0.3))';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.filter = 'grayscale(100%) drop-shadow(0 20px 40px rgba(0,0,0,0.3))';
             }}
           />
         </div>
@@ -32,7 +38,7 @@ const HeroSection = () => {
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-4 leading-tight">
             WHERE TO FLY?
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-neon max-w-3xl mx-auto">
             Find Countless Flights Options & Deals To Various Destinations Around The World
           </p>
         </motion.div>
@@ -68,7 +74,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4, ease: smoothEase }}
-          className="text-2xl md:text-3xl font-bold text-foreground mb-6 text-center md:text-left"
+          className="text-2xl md:text-3xl font-bold text-neon mb-6 text-center md:text-left"
         >
           Start Booking Your Flight Now
         </motion.h2>

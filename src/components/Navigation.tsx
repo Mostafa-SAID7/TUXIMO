@@ -9,46 +9,48 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="bg-foreground text-background rounded-full p-2">
+            <div className="bg-neon text-background rounded-full p-2">
               <Plane className="w-5 h-5" />
             </div>
-            <span className="text-xl font-bold tracking-tight">TUXIMO</span>
+            <span className="text-xl font-bold tracking-tight text-neon">TUXIMO</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             <Link 
               to="/" 
-              className="px-6 py-2 bg-foreground text-background rounded-full hover:bg-foreground/90 transition-colors font-medium"
+              className="px-6 py-2 bg-neon text-background rounded-full hover:bg-neon/90 transition-colors font-medium"
             >
               Home
             </Link>
             <Link 
               to="/hotels" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-neon transition-colors"
             >
               Hotels
             </Link>
             <Link 
               to="/cars" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-neon transition-colors"
             >
               Cars
             </Link>
             <Link 
               to="/support" 
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-neon transition-colors"
             >
               Customer Supports
             </Link>
           </div>
 
           {/* Log In Button */}
-          <Button 
-            className="bg-foreground text-background hover:bg-foreground/90 rounded-full px-6"
-          >
-            Log In
-          </Button>
+          <Link to="/login">
+            <Button 
+              className="bg-neon text-background hover:bg-neon/90 rounded-full px-6"
+            >
+              Log In
+            </Button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button className="md:hidden text-foreground">
