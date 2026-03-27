@@ -5,8 +5,22 @@ const smoothEase = [0.25, 0.1, 0.25, 1] as const;
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12">
-      <div className="container mx-auto px-6 py-16">
+    <section className="min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-12 relative">
+      {/* Large Airplane Image Overlay */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[60%] h-[60%] opacity-80">
+          <img
+            src="/airplane-hero.jpg"
+            alt="Airplane"
+            className="w-full h-full object-contain"
+            style={{
+              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.3))'
+            }}
+          />
+        </div>
+      </div>
+
+      <div className="container mx-auto px-6 py-16 relative z-10">
         {/* Main Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
