@@ -42,7 +42,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2, ease: smoothEase }}
-          className="max-w-xs mx-auto mb-12"
+          className="max-w-xs mb-12"
         >
           <div className="bg-card rounded-2xl shadow-lg border border-border relative overflow-hidden group cursor-pointer">
             <div className="absolute top-4 right-4 bg-foreground text-background text-xs font-bold px-3 py-1 rounded-full z-10">
