@@ -8,7 +8,8 @@ updates:
       day: "monday"
       time: "09:00"
     open-pull-requests-limit: 10
-    # Removed labels - they need to be created in GitHub repo settings first
+    labels:
+      - "dependencies"
     commit-message:
       prefix: "chore"
       prefix-development: "chore"
@@ -29,7 +30,8 @@ updates:
       day: "monday"
       time: "09:00"
     open-pull-requests-limit: 5
-    # Removed labels - they need to be created in GitHub repo settings first
+    labels:
+      - "dependencies"
     commit-message:
       prefix: "ci"
       include: "scope"
