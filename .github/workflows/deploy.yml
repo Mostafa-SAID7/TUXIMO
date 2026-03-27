@@ -124,7 +124,7 @@ jobs:
           path: dist/lost-yeti
       
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2
+        uses: nwtgck/actions-netlify@v3
         with:
           publish-dir: './dist/lost-yeti'
           production-branch: main
