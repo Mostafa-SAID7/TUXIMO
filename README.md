@@ -40,13 +40,13 @@ TUXIMO is a modern, feature-rich travel booking platform that makes planning you
 <div align="center">
 
 ### 🏠 Home Page
-![Home Page](./screenshots/Screenshot%202026-03-27%20131353.png)
+![Home Page](./screenshots/home-page.png)
 
 ### ✈️ Flight Booking
-![Flight Booking](./screenshots/Screenshot%202026-03-27%20131415.png)
+![Flight Booking](./screenshots/flight-booking.png)
 
 ### 🌍 Destinations
-![Destinations](./screenshots/Screenshot%202026-03-27%20131432.png)
+![Destinations](./screenshots/destinations.png)
 
 </div>
 
